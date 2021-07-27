@@ -18,18 +18,18 @@ const App = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={{paddingHorizontal: 15}}>
-        <Text style={styles.header}>Settings</Text>
-        <SettingsOption text={'Update name'} />
+        <Text style={styles.header}>{localized('home_page.settings')}</Text>
+        <SettingsOption text={localized('home_page.update_name')} />
         <Divider />
-        <SettingsOption text={'Update address'} />
+        <SettingsOption text={localized('home_page.update_address')} />
         <Divider />
-        <SettingsOption text={'Social Media'} />
+        <SettingsOption text={localized('home_page.social_media')} />
         <Divider />
-        <SettingsOption text={'Location'} />
+        <SettingsOption text={localized('home_page.location')} />
         <Divider />
-        <SettingsOption text={'First name'} />
+        <SettingsOption text={localized('home_page.first_name')} />
         <Divider />
-        <SettingsOption text={'Last name'} />
+        <SettingsOption text={localized('home_page.last_name')} />
       </ScrollView>
     </SafeAreaView>
   );
