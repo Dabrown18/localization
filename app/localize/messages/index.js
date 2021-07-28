@@ -1,14 +1,16 @@
 export let Locales = {
   en: 'en',
-  el: 'el',
+  es: 'es',
 };
 
 export function translationForLocale(locale) {
   switch (locale) {
-    case Locales.el:
+    case Locales.es:
       return require('./es_US.json');
     case Locales.en: {
       return require('./en_US.json');
     }
+    default:
+      return require('./en_US.json');
   }
 }

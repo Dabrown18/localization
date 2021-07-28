@@ -4,7 +4,6 @@ import {translationForLocale, Locales} from './messages';
 
 function determineBestLocale(locale) {
   if (Locales[locale]) {
-    console.log('Locales[locale]', Locales[locale]);
     return Locales[locale];
   }
 
@@ -17,19 +16,10 @@ function determineBestLocale(locale) {
 
 function iosDeviceLocale() {
   const locale = RNLocalize.getLocales()[0].languageCode;
-  console.log('ios locale', locale);
 
   if (locale.lastIndexOf('-') > 0) {
-    console.log('::::: lastIndexOf', locale);
     return locale;
   }
-
-  console.log('RNLocalize', {
-    RNLocalize:
-      RNLocalize.getLocales()[0].languageCode +
-      '_' +
-      RNLocalize.getLocales()[0].countryCode,
-  });
 
   return (
     RNLocalize.getLocales()[0].languageCode +
@@ -54,19 +44,35 @@ export function deviceLocal() {
 }
 
 function localized(loomkey, ...args) {
-  console.clear();
+  /**
+   * locale returns the language of device
+   * exp. en_US
+   */
   const locale = deviceLocal();
-  console.log('locale');
-  const peerspaceString = translationForLocale(determineBestLocale(locale));
-  console.log('::::: peerspaceString', peerspaceString);
 
+  /**
+   * Returns all screen strings in the device language
+   * @type {{
+   * "home_page.settings": string,
+   * "home_page.update_name": string,
+   * "home_page.update_address": string,
+   * "home_page.social_media": string,
+   * "home_page.location": string,
+   * "home_page.first_name": string,
+   * "home_page.last_name": string
+   * }}
+   */
+  const peerspaceString = translationForLocale(determineBestLocale(locale));
+
+  /**
+   * Returns loomkey value
+   * Exp. home_screen.settings = Ajustes
+   */
   let result =
     peerspaceString[loomkey] || translationForLocale(Locales.base)[loomkey];
-  console.log('result', result);
 
   if (result) {
     result = result.replace(/\%s\d+/g, r => String(args[r.slice(2) - 1]));
-    console.log('::::: result', result);
   }
 
   return result;
