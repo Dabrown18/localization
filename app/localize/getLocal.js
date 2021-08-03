@@ -1,9 +1,13 @@
 import {Platform} from 'react-native';
 import * as RNLocalize from 'react-native-localize';
 import {translationForLocale, Locales} from './messages';
+import {translationForLocale as currencyTranslationForLocale} from './currencies';
 import moment from 'moment-timezone';
 
-export const getLocalCurrency = () => RNLocalize.getCurrencies()[0];
+export const getLocalCurrency = () => {
+  const localeCurrency = RNLocalize.getCurrencies()[0];
+  return currencyTranslationForLocale(localeCurrency);
+};
 
 export function getLocalTime(time) {
   const localTimeZone = RNLocalize.getTimeZone();
