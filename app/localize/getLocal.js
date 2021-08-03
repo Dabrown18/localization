@@ -1,6 +1,14 @@
 import {Platform} from 'react-native';
 import * as RNLocalize from 'react-native-localize';
 import {translationForLocale, Locales} from './messages';
+import moment from 'moment-timezone';
+
+export const getLocalCurrency = () => RNLocalize.getCurrencies()[0];
+
+export function getLocalTime(time) {
+  const localTimeZone = RNLocalize.getTimeZone();
+  return moment.tz(time, localTimeZone).format('h:mm z');
+}
 
 function determineBestLocale(locale) {
   if (Locales[locale]) {

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, StyleSheet, SafeAreaView, ScrollView, View} from 'react-native';
 import localized from './app/localize/getLocal';
+import {getLocalTime, getLocalCurrency} from './app/localize/getLocal';
 
 const SettingsOption = ({text}) => {
   return (
@@ -14,11 +15,22 @@ const Divider = () => {
   return <View style={styles.divider} />;
 };
 
+let utcTime = new Date();
+
 const App = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={{paddingHorizontal: 15}}>
         <Text style={styles.header}>{localized('home_page.settings')}</Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}>
+          <Text>{`Today's time: ${getLocalTime(utcTime)}`}</Text>
+          <Text>{`Currency: ${getLocalCurrency()}`}</Text>
+        </View>
         <SettingsOption text={localized('home_page.update_name')} />
         <Divider />
         <SettingsOption text={localized('home_page.update_address')} />
